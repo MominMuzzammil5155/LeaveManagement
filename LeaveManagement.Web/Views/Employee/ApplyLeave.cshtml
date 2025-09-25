@@ -1,0 +1,130 @@
+﻿@model LeaveManagement.Models.LeaveRequest
+@{
+    ViewBag.Title = "Apply for Leave";
+}
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card shadow-lg rounded-3">
+        <div class="card-header bg-success text-white text-center">
+            <h4 class="mb-0">Apply for Leave</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="ApplyLeave" method="post" novalidate>
+
+                <!-- From Date -->
+                <div class="mb-4">
+                    <label asp-for="FromDate" class="form-label fw-semibold">From Date</label>
+                    <input asp-for="FromDate" type="text" class="form-control datepicker shadow-sm" placeholder="Select start date" required />
+                </div>
+
+                <!-- To Date -->
+                <div class="mb-4">
+                    <label asp-for="ToDate" class="form-label fw-semibold">To Date</label>
+                    <input asp-for="ToDate" type="text" class="form-control datepicker shadow-sm" placeholder="Select end date" required />
+                </div>
+
+                <!-- Reason -->
+                <div class="mb-4">
+                    <label asp-for="Reason" class="form-label fw-semibold">Reason</label>
+                    <textarea asp-for="Reason" class="form-control shadow-sm" rows="4" placeholder="Describe your reason..." required></textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success w-100 py-2 shadow-lg btn-lg mb-3 transition-transform hover:scale-105">Submit Leave Request</button>
+
+                <!-- Error Message -->
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger text-center mt-3">@ViewBag.Error</div>
+                }
+            </form>
+
+            <!-- View Status Button -->
+            <div class="mt-4 text-center">
+                <a href="@Url.Action("ViewStatus", "Employee")" class="btn btn-outline-secondary btn-lg">
+                    View My Leave Status
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Flatpickr Theme -->
+<link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css" rel="stylesheet" />
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    flatpickr(".datepicker", {
+        dateFormat: "d-m-Y",
+        minDate: "today",
+        defaultDate: "today"
+    });
+</script>
+
+<!-- Custom Styles -->
+<style>
+    .card {
+        border-radius: 20px; /* rounded corners */
+    }
+
+    /* Datepicker Input Focus */
+    .form-control:focus, .form-select:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    }
+
+    /* Button Hover Effect */
+    .btn:hover {
+        background: #218838;
+        transform: scale(1.05);
+    }
+
+    /* Custom Transition for Button */
+    .transition-transform {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    /* Hover Scale Effect */
+    .hover\:scale-105:hover {
+        transform: scale(1.05);
+    }
+
+    /* Styling for the datepicker */
+    .datepicker {
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    .card-header {
+        border-radius: 20px 20px 0 0;
+    }
+
+    /* Input and Textarea Styling */
+    .form-control, .form-select, .datepicker {
+        border-radius: 8px;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form-control {
+        transition: border-color 0.3s ease;
+    }
+
+        .form-control:focus {
+            border-color: #28a745;
+            box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+        }
+
+    .btn-outline-secondary {
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #28a745;
+            color: #fff;
+        }
+</style>

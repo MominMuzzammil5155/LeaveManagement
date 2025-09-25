@@ -1,0 +1,125 @@
+﻿@model List<LeaveManagement.Models.LeaveRequest>
+@{
+    ViewBag.Title = "My Leave Requests";
+}
+
+<div class="container mt-5" style="max-width: 900px;">
+    <!-- Title Section -->
+    <h2 class="mb-4 text-primary text-center">My Leave Requests</h2>
+
+    <!-- Card for the Table -->
+    <div class="card shadow-lg rounded-3">
+        <div class="card-body">
+            <!-- Table -->
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>From</th>
+                            <th>To</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var leave in Model)
+                        {
+                            <tr class="hover-shadow">
+                                <td>@leave.FromDate.ToString("dd MMM yyyy")</td>
+                                <td>@leave.ToDate.ToString("dd MMM yyyy")</td>
+                                <td>@leave.Reason</td>
+                                <td>
+                                    @if (leave.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark">Pending</span>
+                                    }
+                                    else if (leave.Status == "Approved")
+                                    {
+                                        <span class="badge bg-success">Approved</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger">Rejected</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply for New Leave Button -->
+    <div class="mt-4 text-center">
+        <a href="@Url.Action("ApplyLeave", "Employee")" class="btn btn-outline-secondary btn-lg shadow-lg transition-all hover:scale-105">
+            Apply for New Leave
+        </a>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Table Hover Effect */
+    .hover-shadow:hover {
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        transform: scale(1.02);
+        transition: all 0.2s ease-in-out;
+    }
+
+    /* Card Styling */
+    .card {
+        border-radius: 20px;
+    }
+
+    /* Button Hover and Animation */
+    .btn-outline-secondary {
+        border-radius: 50px;
+        font-weight: 600;
+        padding: 10px 30px;
+        text-transform: uppercase;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+    /* Status Badge Styling */
+    .badge {
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 10px;
+    }
+
+        .badge.bg-warning {
+            background-color: #ffc107;
+        }
+
+        .badge.bg-success {
+            background-color: #28a745;
+        }
+
+        .badge.bg-danger {
+            background-color: #dc3545;
+        }
+
+    /* Table Styling */
+    .table th, .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    /* Zebra Striping for Table Rows */
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    /* Responsive Table */
+    .table-responsive {
+        border-radius: 10px;
+        overflow-x: auto;
+    }
+</style>

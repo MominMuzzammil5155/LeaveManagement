@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<div class="d-flex justify-content-center align-items-center vh-100 bg-gradient">
+    <div class="card shadow-lg p-5" style="max-width: 400px; width: 100%; border-radius: 15px;">
+        <h2 class="text-center mb-4 text-primary">Welcome Back</h2>
+
+        <!-- Login Form -->
+        <form asp-action="Login" method="post">
+
+            <!-- Email Input -->
+            <div class="mb-4">
+                <label for="email" class="form-label fw-semibold">Email</label>
+                <input type="email" id="email" name="email" class="form-control form-control-lg shadow-sm" placeholder="your.email@example.com" required />
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+                <label for="password" class="form-label fw-semibold">Password</label>
+                <input type="password" id="password" name="password" class="form-control form-control-lg shadow-sm" placeholder="••••••••" required />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 py-2 shadow-lg btn-lg mb-3 transition-transform hover:scale-105">Login</button>
+
+            <!-- Error Message -->
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger text-center mt-2">@ViewBag.Error</div>
+            }
+        </form>
+
+        <!-- Register Link -->
+        <p class="text-center mt-3">
+            Don't have an account? <a href="@Url.Action("Register", "Account")" class="text-decoration-none text-primary">Register here</a>.
+        </p>
+    </div>
+</div>
+
+<!-- Custom Background Gradient (Add in CSS) -->
+<style>
+    .bg-gradient {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    }
+
+    /* Input Focus Effects */
+    .form-control:focus {
+        border-color: #6a11cb;
+        box-shadow: 0 0 8px rgba(106, 17, 203, 0.5);
+    }
+
+    /* Button Hover Effect */
+    .btn:hover {
+        background: #5a0e9e;
+        transform: scale(1.05);
+    }
+
+    /* Custom Animation for Button */
+    .transition-transform {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .hover\:scale-105:hover {
+        transform: scale(1.05);
+    }
+</style>
